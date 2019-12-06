@@ -50,5 +50,5 @@ class Submarine(Ship):
 
 class Destroyer(Ship):
     def __init__(self, x, y, direction: Direction):
-        self.length = 5
+        self.length = 2
         super().__init__(x, y, direction, self.length)

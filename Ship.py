@@ -3,7 +3,6 @@ Ship class for battleship game
 """
 from enum import Enum
 
-
 class Direction(Enum):
     vertical = 1
     horizontal = 2

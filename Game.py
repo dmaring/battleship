@@ -1,11 +1,33 @@
+Ship = __import__("Ship").Ship
+Direction = __import__("Ship").Direction
+
+
 class Board:
     def __init__(self):
+        self.screen = [[0 for x in range(10)] for y in range(10)]
         self.ships_remaining = 0
+        self.fleet = []
+
+    def display_board(self):
+        for x in range(len(self.screen)):
+            # for y in range(len(self.screen)):
+            print(self.screen[x])
+
+    def fill_board(self):
+        for ship in self.fleet:
+            for x, y in ship.coords:
+                self.screen[x][y] = 'X'
 
     def add_ship(self, num: int):
         # Code to add ship
         print("adding ship(s)...")
-        self.ships_remaining += int(num)
+        s = Ship(0, 1, Direction.vertical, 2)
+        s2 = Ship(7, 2, Direction.horizontal, 3)
+        self.fleet.append(s)
+        self.fleet.append(s2)
+        self.ships_remaining += 1
+        self.fill_board()
+        self.display_board()
 
 
 class Player:

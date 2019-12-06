@@ -9,9 +9,7 @@ class Direction(Enum):
 
 
 class Ship:
-
     def __init__(self, x: int, y: int, direction: Direction, length: int):
-        # direction True = vertical, direction False = horizontal
         self.coords = []
         if direction == Direction.vertical:
             for i in range(length):
@@ -30,3 +28,27 @@ class Ship:
         else:
             #TODO sink ship
             print("Ship is sunk!")
+
+
+class Carrier(Ship):
+    def __init__(self, x, y, direction: Direction):
+        self.length = 5
+        super().__init__(x, y, direction, self.length)
+
+
+class Battleship(Ship):
+    def __init__(self, x, y, direction: Direction):
+        self.length = 4
+        super().__init__(x, y, direction, self.length)
+
+
+class Submarine(Ship):
+    def __init__(self, x, y, direction: Direction):
+        self.length = 3
+        super().__init__(x, y, direction, self.length)
+
+
+class Destroyer(Ship):
+    def __init__(self, x, y, direction: Direction):
+        self.length = 5
+        super().__init__(x, y, direction, self.length)

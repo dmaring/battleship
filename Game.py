@@ -1,18 +1,17 @@
 class Board:
     def __init__(self):
-        pass
-
-
-class Player:
-    def __init__(self, player_num: int):
-        self.name = "Player " + str(player_num)
-        self.board = Board()
         self.ships_remaining = 0
 
     def add_ship(self, num: int):
         # Code to add ship
         print("adding ship(s)...")
         self.ships_remaining += int(num)
+
+
+class Player:
+    def __init__(self, player_num: int):
+        self.name = "Player " + str(player_num)
+        self.board = Board()
 
 
 class Game:
@@ -23,7 +22,7 @@ class Game:
         self.opponent = self.p1
 
     def start_game(self):
-        if self.current_player.ships_remaining == 0:
+        if self.current_player.board.ships_remaining == 0:
             self.initialize_ships()
         game_on = True
         while game_on:
@@ -51,22 +50,22 @@ class Game:
             self.current_player = self.p1
 
     def check_victory(self):
-        if self.opponent.ships_remaining == 0:
+        if self.opponent.board.ships_remaining == 0:
             return True
 
     def initialize_ships(self):
         print("Player 1, how many ships would you like to start off with?")
         count = input()
-        self.p1.add_ship(count)
+        self.p1.board.add_ship(count)
         print("Player 2, how many ships would you like to start off with?")
         count = input()
-        self.p2.add_ship(count)
+        self.p2.board.add_ship(count)
 
     def display_score(self):
         print("\n======================")
         print("Current score:")
-        print(f"Player 1 has {self.p1.ships_remaining} remaining ships.")
-        print(f"Player 2 has {self.p2.ships_remaining} remaining ships.")
+        print(f"Player 1 has {self.p1.board.ships_remaining} remaining ships.")
+        print(f"Player 2 has {self.p2.board.ships_remaining} remaining ships.")
         print("======================\n")
 
 

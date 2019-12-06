@@ -22,12 +22,11 @@ class Board:
                 else:
                     self.screen[x][y] = 'X'
 
-    def add_ship(self, num: int):
+    def add_ship(self, x, y, direction, length):
         print("adding ship(s)...")
-        s = Ship(0, 1, Direction.vertical, 2)
-        s2 = Ship(0, 2, Direction.horizontal, 3)
-        self.fleet.append(s)
-        self.fleet.append(s2)
+        # s = Ship(0, 1, Direction.vertical, 2)
+        # s2 = Ship(0, 2, Direction.horizontal, 3)
+        self.fleet.append(Ship(int(x), int(y), direction, int(length)))
         self.ships_remaining += 1
         self.fill_board()
         self.display_board()
@@ -52,6 +51,8 @@ class Game:
 
     def start_game(self):
         if self.current_player.board.ships_remaining == 0:
+            self.initialize_ships()
+            self.toggle_turn()
             self.initialize_ships()
         game_on = True
         while game_on:
@@ -83,12 +84,19 @@ class Game:
             return True
 
     def initialize_ships(self):
-        print("Player 1, how many ships would you like to start off with?")
-        count = input()
-        self.p1.board.add_ship(count)
-        print("Player 2, how many ships would you like to start off with?")
-        count = input()
-        self.p2.board.add_ship(count)
+        # print("Player 1, how many ships would you like to start off with?")
+        x = input("Give x coordinate: ")
+        y = input("Give y coordinate: ")
+        d = input("Which direction? (v or h): ")
+        direction = None
+        if (d == "v"):
+            direction = Direction.vertical
+        elif (d == "h"):
+            direction = Direction.horizontal
+        l = input("what type of ship? 1=destroyer 2=submarine 3=battleship 4=carrier")
+        self.current_player.board.add_ship(x, y, direction, l)
+        # if ship_type == 4:
+
 
     def display_score(self):
         print("\n======================")

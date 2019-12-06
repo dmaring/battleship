@@ -16,19 +16,26 @@ class Board:
     def fill_board(self):
         for ship in self.fleet:
             for x, y in ship.coords:
-                self.screen[x][y] = 'X'
+                if self.validate_placement(x, y) == False:
+                    print("not a valid placement")
+                    break
+                else:
+                    self.screen[x][y] = 'X'
 
     def add_ship(self, num: int):
-        # Code to add ship
         print("adding ship(s)...")
         s = Ship(0, 1, Direction.vertical, 2)
-        s2 = Ship(7, 2, Direction.horizontal, 3)
+        s2 = Ship(0, 2, Direction.horizontal, 3)
         self.fleet.append(s)
         self.fleet.append(s2)
         self.ships_remaining += 1
         self.fill_board()
         self.display_board()
 
+    def validate_placement(self, x, y):
+        if self.screen[x][y] != 0:
+            return False
+        return True
 
 class Player:
     def __init__(self, player_num: int):

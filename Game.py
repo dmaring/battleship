@@ -1,5 +1,4 @@
-Ship = __import__("Ship").Ship
-Direction = __import__("Ship").Direction
+from Ship import Ship, Destroyer, Carrier, Battleship, Submarine, Direction
 
 
 class Board:
@@ -42,7 +41,14 @@ class Board:
         print("adding ship(s)...")
         # s = Ship(0, 1, Direction.vertical, 2)
         # s2 = Ship(0, 2, Direction.horizontal, 3)
-        self.fleet.append(Ship(int(x), int(y), direction, int(length)))
+        ship_dict = {
+            "1": Destroyer,
+            "2": Submarine,
+            "3": Battleship,
+            "4": Carrier
+        }
+        ship_const = ship_dict.get(length)
+        self.fleet.append(ship_const(int(x), int(y), direction))
         self.ships_remaining += 1
         self.fill_board()
         self.display_board()

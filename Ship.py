@@ -25,6 +25,7 @@ class Ship:
     def dec_health(self, amount=1):
         if self.health:
             self.health -= 1
+            print("took damage")
         else:
             #TODO sink ship
             print("Ship is sunk!")

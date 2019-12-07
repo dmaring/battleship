@@ -20,7 +20,23 @@ class Board:
                     print("not a valid placement")
                     break
                 else:
-                    self.screen[x][y] = 'X'
+                    self.screen[x][y] = 'S'
+
+    def validate_hit(self, x, y):
+        if self.screen[x][y] == 'S':
+            for ship in self.fleet[:]:
+                for coord in ship.coords:
+                    if coord == (x, y):
+                        print("hit!")
+                        self.screen[x][y] = 'X'
+                        ship.dec_health()
+                        if ship.health == 0:
+                            self.ships_remaining -= 1
+                            self.fleet.remove(ship)
+                        self.display_board()
+                        return True
+        return False
+
 
     def add_ship(self, x, y, direction, length):
         print("adding ship(s)...")
@@ -58,7 +74,8 @@ class Game:
         while game_on:
             self.toggle_turn()
             x, y = self.get_user_input()
-            hit = check_hit()
+            hit = self.opponent.board.validate_hit(int(x), int(y))
+                
             if hit and self.check_victory():
                 game_on = False
             self.display_score()
@@ -106,8 +123,6 @@ class Game:
         print("======================\n")
 
 
-def check_hit():
-    return True
 
 
 g = Game()

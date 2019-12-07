@@ -25,6 +25,7 @@ class Board:
         if self.screen[x][y] != 0:
             for ship in self.fleet[:]:
                 for coord in ship.coords:
+                    print("coord = ", str(coord))
                     if coord == (x, y):
                         print("hit!")
                         self.screen[x][y] = 'X'
@@ -102,8 +103,10 @@ class Game:
     def toggle_turn(self):
         if self.current_player == self.p1:
             self.current_player = self.p2
+            self.opponent = self.p1
         else:
             self.current_player = self.p1
+            self.opponent = self.p2
 
     def check_victory(self):
         if self.opponent.board.ships_remaining == 0:
